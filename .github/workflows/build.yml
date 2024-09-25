@@ -32,22 +32,36 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+
       - name: Install Dependencies
         if: steps.cache-nodemodules.outputs.cache-hit != 'true'
         run: |
           npm ci --force
+
       - name: Build
         run: |
           npm run build --force
+
       - name: Lint
         run: |
           npm run lint
+
       - name: Update types to latest
         run: |
           npm install --save-dev @types/node@latest --force
+
       #- name: Test
       #  run: |
       #    npm run test --watch=false --browsers=ChromeHeadless
+
+      - name: lint
+        run: |
+           ng lint
+
+      - name: Audit
+        run: |
+           npm audit fix
+
       - name: Conventional Changelog Action
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3
@@ -64,6 +78,7 @@ jobs:
           tag_name: ${{ steps.changelog.outputs.tag }}
           release_name: ${{ steps.changelog.outputs.tag }}
           body: ${{ steps.changelog.outputs.clean_changelog }}
+
       - name: Deploy
         run: |
           npm run deploy
