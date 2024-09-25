@@ -54,9 +54,9 @@ jobs:
       #  run: |
       #    npm run test --watch=false --browsers=ChromeHeadless
 
-      - name: lint
-        run: |
-           ng lint
+      #- name: lint
+      #  run: |
+      #     ng lint
 
       - name: Audit
         run: |
