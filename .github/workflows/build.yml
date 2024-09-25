@@ -58,9 +58,9 @@ jobs:
       #  run: |
       #     ng lint
 
-      - name: Audit
-        run: |
-           npm audit fix
+      #- name: Audit
+      #  run: |
+      #     npm audit fix
 
       - name: Conventional Changelog Action
         id: changelog
